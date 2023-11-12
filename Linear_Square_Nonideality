@@ -1,0 +1,21 @@
+ax = 0.005; %erreur axe x en decimal
+ay = 0.005; %erreur axe y en decimal
+offset = -0.2;
+bx = 0;
+by = 0;
+alpha = 2*pi/360  * 15;
+
+%x*sin(alpha) - y*cos(alpha)
+
+A = ones(8);
+
+for x = 1:8
+   for y = 1:8
+       A(x,y) = A(x,y) + ax*((x*cos(alpha) - y*sin(alpha))-bx) + ay*((x*sin(alpha) - y*cos(alpha))-by) + offset;
+       A(x,y) = A(x,y) + ax*((x*cos(alpha) - y*sin(alpha))-bx)^2 + ay*((x*sin(alpha) - y*cos(alpha))-by)^2;
+   end
+end
+
+figure;
+surf(A);
+counter = 0;
